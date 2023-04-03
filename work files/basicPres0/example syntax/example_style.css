@@ -12,18 +12,15 @@
 }
 
 .title-text {
-    position: relative;
     font-size: 72pt;
     font-weight: bold;
     font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
-    color: #0960a7;
+    margin-bottom: 24pt;
 }
 .subtitle-text {
-    position: relative;
     font-size: 36pt;
     font-style: italic;
     font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
-    color: #3590db;
 }
 
 .pane-title {

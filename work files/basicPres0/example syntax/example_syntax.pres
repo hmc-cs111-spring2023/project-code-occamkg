@@ -3,11 +3,17 @@ elements: {
         text: "Presentation Title"
         class: title-text
         align: center-x
+        style: {
+            color: #0960a7
+        }
     }
     subtitle = {
         text: "Subtitle"
         class: subtitle-text
         align: center-x
+        style: {
+            color: #3590db
+        }
     }
     titleFrameBox = {
         content: [mainTitle, subtitle]

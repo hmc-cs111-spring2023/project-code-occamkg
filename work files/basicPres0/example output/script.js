@@ -117,7 +117,7 @@ window.addEventListener('load', function() {
     });
 
     if (URLparams.has('frame')) {
-        if (URLparams.get('frame') && URLparams.get('frame')) {
+        if (URLparams.get('frame') >= 0 && URLparams.get('frame') <= numFrames) {
             goToKeyframe(URLparams.get('frame'))
         }
         else {
