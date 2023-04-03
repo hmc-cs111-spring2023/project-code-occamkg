@@ -1,0 +1,73 @@
+elements: {
+    mainTitle = {
+        text: "Presentation Title"
+        class: title-text
+        align: center-x
+    }
+    subtitle = {
+        text: "Subtitle"
+        class: subtitle-text
+        align: center-x
+    }
+    titleFrameBox = {
+        content: [mainTitle, subtitle]
+        align: center-xy
+    }
+
+    examplePaneTitle = {
+        text: "Pane Title"
+        class: pane-title
+    }
+    exampleContent = {
+        content: [
+            item1 = {
+                bullet: "Example text 1"
+                class: basic-text
+            },
+            item2 = {
+                bullet: "Example text 2"
+                class: basic-text
+            },
+            item3 = {
+                bullet: "Example text 3"
+                class: basic-text
+            }
+        ]
+    }
+    paneBox = {
+        content: [examplePaneTitle, exampleContent]
+    }
+}
+
+
+transitions: [
+    {
+        titleFrameBox show
+    },
+    {
+        titleFrameBox flyOutRight
+        then examplePaneTitle show
+    },
+    {
+        item1 show
+    },
+    {
+        item2 show
+        and item1 style {
+            opacity: 0.5
+            font-size: 28pt
+        }
+    },
+    {
+        item3 show
+        and item2 style {
+            opacity: 0.5
+            font-size: 28pt
+        }
+    },
+    {
+        paneBox hide
+    }
+]
+
+// I like the double slash comment syntax
