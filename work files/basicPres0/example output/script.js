@@ -115,6 +115,14 @@ window.addEventListener('load', function() {
             backKeyframe();
         }
     });
+    this.window.addEventListener('click', function(e) {
+        if (e.clientX < this.window.innerWidth/2) {
+            backKeyframe();
+        }
+        else {
+            advanceKeyframe();
+        }
+    })
 
     if (URLparams.has('frame')) {
         if (URLparams.get('frame') >= 0 && URLparams.get('frame') <= numFrames) {
