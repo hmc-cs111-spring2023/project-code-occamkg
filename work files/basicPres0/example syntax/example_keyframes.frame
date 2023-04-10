@@ -1,0 +1,20 @@
+// Group 1
+--> title-frame-box show
+
+// Group 2
+--> title-frame-box flyOutRight
+    then example-pane-title show
+--> item-1 show
+--> item-2 show
+    and item-1 style {
+        opacity: 0.5;
+        font-size: 28pt;
+    }
+--> item-3 show
+    and item-2 style {
+        opacity: 0.5;
+        font-size: 28pt;
+    }
+
+// Group 3
+--> pane-box hide

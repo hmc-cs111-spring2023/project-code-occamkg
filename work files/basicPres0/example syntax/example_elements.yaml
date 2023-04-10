@@ -1,0 +1,34 @@
+# Frame set 1
+
+title-frame-box:
+    content:
+        - main-title:
+            text: "Presentation Title"
+            class: title-text
+            align: center-x
+            style: 'color: #0960a7;'
+        - subtitle:
+            text: "Subtitle"
+            class: subtitle-text
+            style: 'color: #3590db;'
+    align: center-xy
+
+
+# Frame set 2
+example-pane-title:
+    text: "Pane Title"
+    class: pane-title
+
+example-content:
+    ul:
+        - item-1:
+            item: "Example text 1"
+            class: basic-text
+        - item-2:
+            item: "Example text 2"
+            class: basic-text
+        - item-3:
+            item: "Example text 3"
+            class: basic-text
+pane-box:
+    content: [example-pane-title, example-content]

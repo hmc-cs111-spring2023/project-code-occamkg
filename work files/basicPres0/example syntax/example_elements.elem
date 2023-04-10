@@ -1,0 +1,46 @@
+// Frame set 1
+mainTitle = {
+    text: "Presentation Title"
+    class: title-text
+    align: center-x
+    style: {
+        color: #0960a7
+    }
+}
+subtitle = {
+    text: "Subtitle"
+    class: subtitle-text
+    align: center-x
+    style: {
+        color: #3590db
+    }
+}
+titleFrameBox = {
+    content: [mainTitle, subtitle]
+    align: center-xy
+}
+
+//Frame set 2
+examplePaneTitle = {
+    text: "Pane Title"
+    class: pane-title
+}
+exampleContent = {
+    content: [
+        item1 = {
+            bullet: "Example text 1"
+            class: basic-text
+        },
+        item2 = {
+            bullet: "Example text 2"
+            class: basic-text
+        },
+        item3 = {
+            bullet: "Example text 3"
+            class: basic-text
+        }
+    ]
+}
+paneBox = {
+    content: [examplePaneTitle, exampleContent]
+}

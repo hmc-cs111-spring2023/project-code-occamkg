@@ -115,8 +115,9 @@ window.addEventListener('load', function() {
             backKeyframe();
         }
     });
-    this.window.addEventListener('click', function(e) {
-        if (e.clientX < this.window.innerWidth/2) {
+    window.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (e.clientX < window.innerWidth/2) {
             backKeyframe();
         }
         else {
