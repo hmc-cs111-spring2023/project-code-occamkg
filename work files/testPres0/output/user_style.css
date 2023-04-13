@@ -1,0 +1,40 @@
+#bg {
+    background: #000;
+}
+
+#canvas {
+    background: #fff;
+    aspect-ratio: 16/9;
+}
+
+.content {
+    padding: 5%;
+}
+
+.title-text {
+    font-size: 7cqw;
+    font-weight: bold;
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
+    margin-bottom: 0.5em;
+}
+.subtitle-text {
+    font-size: 4cqw;
+    font-style: italic;
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
+}
+
+.pane-title {
+    font-size: 5cqw;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-decoration: underline;
+    margin-bottom: 1em;
+}
+.basic-text {
+    font-size: 4cqw;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-bottom: 0.5em;
+}
+.faded-text {
+    opacity: 0.5;
+    font-size: 3cqw;
+}

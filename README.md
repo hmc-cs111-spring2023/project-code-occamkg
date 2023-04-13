@@ -2,11 +2,14 @@
 
 ## File Structure
 
-In `work files`, there are example presentations (currently only 1) that contain
-desired input and output.
-Within the `example output` folder, there are the output files as HTML, CSS, and
-JS files.
-The HTML file should be renderable by opening it in the browser (I only tested
-in Chrome).
-In the `example syntax` folder, the bulk of the example syntax is in the `.pres`
-file with basic styling in a separate CSS file.
+All of the necessary code to run the DSL is in the `program` folder.
+When using the DSL in a folder `myFolder`, you can compile it using `python path/to/downloaded/program/run.py myFolder outputFolder`.
+To run, `myFolder` must contain a `.yaml` file containing element definitions,
+a `.frame` file containing keyframe transitions,
+and optionally a `.css` file containing styles that the user can reference throughout 
+The `outputFolder` will the contain the presentation `HTML` along with its supporting files.
+This `HTML` can be opened in most modern browsers.
+
+In `work files`, there are example presentations that contain some example input and output.
+`basicPres0` contains example input and output files conceptualized before making the DSL.
+`testPres0` has the same presentation, but it is runnable from the `input` folder and generates the `output` folder.

@@ -11,15 +11,9 @@ I really don't need these lines, but ¯\_(ツ)_/¯
     then #example-pane-title show
 --> #item-1 show
 --> #item-2 show
-    and #item-1 style {
-        opacity: 0.5;
-        font-size: 3cqw;
-    }
+    and #item-1 addClass {faded-text}
 --> #item-3 show
-    and #item-2 style {
-        opacity: 0.5;
-        font-size: 3cqw; // this is an inline comment
-    }
+    and #item-2 addClass {faded-text}
 
 // Group 3
 --> #pane-box hide

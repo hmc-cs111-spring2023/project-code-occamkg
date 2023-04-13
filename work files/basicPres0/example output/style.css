@@ -1,6 +1,7 @@
 * {
     margin: 0;
     border: 0;
+    padding: 0;
     transition: all 0.2s;
     box-sizing: border-box;
 }
@@ -27,6 +28,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     overflow: hidden;
+    container-type: size;
 }
 
 .wait {
@@ -60,28 +62,28 @@ body {
 
 .title-text {
     position: relative;
-    font-size: 72pt;
+    font-size: 7.2cqi;
     font-weight: bold;
     font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
     color: #0960a7;
-    margin-bottom: 24pt;
+    margin-bottom: 2.4cqi;
 }
 .subtitle-text {
     position: relative;
-    font-size: 36pt;
+    font-size: 3.6cqi;
     font-style: italic;
     font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
     color: #3590db;
 }
 
 .pane-title {
-    font-size: 48pt;
+    font-size: 4.8cqi;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     text-decoration: underline;
-    margin-bottom: 48pt;
+    margin-bottom: 4.8cqi;
 }
 .basic-text {
-    font-size: 36pt;
+    font-size: 3.6cqi;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    margin-bottom: 20pt;
+    margin-bottom: 2.0cqi;
 }
