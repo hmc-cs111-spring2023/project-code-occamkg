@@ -45,7 +45,7 @@ def run(in_path, out_path):
                        os.path.join(out_path, 'frames.js'))
     elem_file = prompt_file(in_path, 'element')
     ielem.parseFile(os.path.join(in_path, elem_file),
-                    os.path.join(out_path, 'presentation.html'))
+                    os.path.join(out_path, 'index.html'))
 
 if __name__ == '__main__':
     in_path = os.getcwd()
