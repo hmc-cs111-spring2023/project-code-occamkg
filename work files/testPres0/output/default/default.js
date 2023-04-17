@@ -17,15 +17,12 @@ function advanceKeyframe() {
                             elem.classList.remove(transition.value);
                         }
                         break;
-                    case 'translate':
-                        let current_transform = window.getComputedStyle(elem).transform;
-                        if (current_transform == 'none') {
-                            current_transform = '';
-                        }
-                        let translation = `translate(${transition.value[0]}, ${transition.value[1]})`;
-                        elem.style.transform = `${current_transform} ${translation}`;
+                    case 'transform':
+                        elem.style.transform += transition.value;
+                        break;
                     case 'style':
                         elem.style.cssText = `${elem.style.cssText} ${transition.value}`;
+                        break;
                 }
             }
         }
@@ -46,24 +43,12 @@ function backKeyframe() {
                             elem.classList.add(transition.value);
                         }
                         break;
-                    case 'translate':
-                        let current_transform = window.getComputedStyle(elem).transform;
-                        if (current_transform == 'none') {
-                            current_transform = '';
-                        }
-                        let xy_trans = [];
-                        for (let val of transition.value) {
-                            if (val.trim().substring(0, 1) == '-') {
-                                xy_trans.push(val.substring(1));
-                            }
-                            else {
-                                xy_trans.push('-' + val);
-                            }
-                        }
-                        let translation = `translate(${xy_trans[0]}, ${xy_trans[1]})`;
-                        elem.style.transform = `${current_transform} ${translation}`;
+                    case 'transform':
+                        elem.style.transform = elem.style.transform.replace(transition.value, '');
+                        break;
                     case 'style':
                         elem.style.cssText = elem.style.cssText.replace(transition.value, '');
+                        break;
                 }
             }
         }
@@ -73,14 +58,28 @@ function backKeyframe() {
 }
 
 function updateKeyframe() {
-    // console.log(currentKeyframe);
+    document.getElementById('frame-num').value = currentKeyframe;
     let newURL = window.location.origin +
         window.location.pathname +
         "?frame=" + currentKeyframe;
     window.history.replaceState({}, "", newURL);
+
+    if (currentKeyframe == allFrames.length - 1) {
+        document.getElementById('fwd-frame').disabled = true;
+    }
+    else {
+        document.getElementById('fwd-frame').disabled = false;
+    }
+    if (currentKeyframe == 0) {
+        document.getElementById('back-frame').disabled = true;
+    }
+    else {
+        document.getElementById('back-frame').disabled = false;
+    }
 }
 
 function goToKeyframe(keyframe) {
+    document.body.classList.add('no-transition');
     if (keyframe >= 0 && keyframe < allFrames.length) {
         while (currentKeyframe < keyframe) {
             advanceKeyframe();
@@ -92,9 +91,11 @@ function goToKeyframe(keyframe) {
     else {
         goToKeyframe(0);
     }
+    document.body.classList.remove('no-transition');
 }
 
 function hideElements() {
+    document.body.classList.add('no-transition');
     for (frame of allFrames) {
         for (transition of frame) {
             if (transition.effect == 'class' && transition.value == 'show') {
@@ -111,6 +112,7 @@ function hideElements() {
             }
         }
     }
+    document.body.classList.remove('no-transition');
 }
 
 window.addEventListener('keydown', function(e) {
@@ -121,18 +123,19 @@ window.addEventListener('keydown', function(e) {
         backKeyframe();
     }
 });
-window.addEventListener('click', function(e) {
-    e.preventDefault();
-    if (e.clientX < window.innerWidth/2) {
-        backKeyframe();
-    }
-    else {
-        advanceKeyframe();
-    }
-})
+// window.addEventListener('click', function(e) {
+//     e.preventDefault();
+//     if (e.clientX < window.innerWidth/2) {
+//         backKeyframe();
+//     }
+//     else {
+//         advanceKeyframe();
+//     }
+// })
 
 window.addEventListener('load', function() {
     hideElements();
+    feather.replace();
     document.getElementById('cover').classList.add('hide');
 
     if (URLparams.has('frame')) {

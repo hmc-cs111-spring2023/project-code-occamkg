@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Presentation Title</title>
+    <link rel="stylesheet" href="default/default.css"/>
+    <link rel="stylesheet" href="user_style.css"/>
+    <script src="https://unpkg.com/feather-icons"> </script>
+    <script type="text/javascript" src="frames.js"> </script>
+    <script type="text/javascript" src="default/default.js"> </script>
+  </head>
+  <body>
+    <div id="bg">
+      <div id="canvas">
+        <div class="full content">
+          <div id="title-page" class=" center-x center-y" style="">
+            <p id="main-title" class="title center-x" style="color: firebrick; text-shadow: -0.2cqw 0.2cqw 0.2cqw goldenrod">Presentation with Images</p>
+            <p id="subtitle" class="subtitle" style="color: goldenrod;">(yet another test)</p>
+          </div>
+        </div>
+        <div class="full content">
+          <img src="https://picsum.photos/seed/123/1000" id="img1" class="random-img center-x" style="height: 100%"/>
+        </div>
+        <div class="full content">
+          <img src="https://picsum.photos/seed/42/1000" id="img2" class="random-img center-x" style="height: 100%"/>
+        </div>
+        <div class="full content">
+          <img src="https://picsum.photos/seed/0/1000" id="img3" class="random-img center-x" style="height: 100%"/>
+        </div>
+        <div id="closing" class="title full" style="background-image: url(&quot;https://image.cnbcfm.com/api/v1/image/105992231-1561667465295gettyimages-521697453.jpeg?v=1561667497&amp;w=1920&amp;h=1080&quot;)">
+          <p class=" center-x center-y" style="color: cornflowerblue; text-shadow: -0.1cqw 0.1cqw black">Here's a puppy!</p>
+        </div>
+        <div class="full content">
+          <div id="img-text" class="columns" style="padding-left: 20cqw; row-gap: 5%; z-index: -1;">
+            <div id="text1" style="">
+              <p class="header-text" style="">Isn't this picture cool?</p>
+              <p class="body-text" style="">In turkey porchetta lorem, fatback strip steak ad pastrami. Frankfurter elit ipsum shoulder, bacon chuck labore ground round salami in occaecat culpa rump nisi sed.</p>
+            </div>
+            <div id="text2" style="">
+              <p class="header-text" style="">Here's another picture!</p>
+              <p class="body-text" style="">Jerky laborum short loin, id frankfurter adipisicing anim pastrami eu veniam qui aliquip cupim. Jerky incididunt ham hock, flank spare ribs anim hamburger frankfurter nulla in.</p>
+            </div>
+            <div id="text3" style="">
+              <p class="header-text" style="">Wow, three whole pictures</p>
+              <p class="body-text" style="">Adipisicing in aliqua capicola flank, pork chop turkey officia dolore strip steak kevin fugiat tongue anim laborum. Pig cupidatat filet mignon voluptate, id meatloaf nostrud ullamco meatball strip steak.</p>
+            </div>
+          </div>
+        </div>
+        <div id="frame-navigation">
+          <button id="back-frame" onclick="backKeyframe()">
+            <i data-feather="chevron-left"> </i>
+          </button>
+          <input id="frame-num" class="nav-frame-num" onclick="this.select()" onchange="goToKeyframe(this.value)"/>
+          <button id="fwd-frame" onclick="advanceKeyframe()">
+            <i data-feather="chevron-right"> </i>
+          </button>
+        </div>
+        <div id="cover"/>
+      </div>
+    </div>
+  </body>
+</html>

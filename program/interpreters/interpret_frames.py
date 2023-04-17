@@ -32,21 +32,22 @@ def parseTransitionSet(set):
         animations = re.split(' and ', group)
         for animation in animations:
             if (len(animation.strip()) > 0):
-                command = parseTransition(animation.strip())
-                commands.append(command)
+                command_group = parseTransition(animation.strip())
+                commands.append(command_group)
         # delay = newDelay
 
     return commands
 
 def parseTransition(line):
-    # parses 1: the target element selector (first word),
+    # parses 1: the target element selector
+    #           (first word or list of comma separated words),
     #        2: the transition type (second word),
     #        4: transition arguments (in braces [optional]),
     #        6: a number indicating transition time in seconds
     #           (number preceded by 'for' [optional])
     #        8: a number indicating transition delay in seconds
     #           (number preceded by 'after' [optional])
-    g = re.compile(r'^(.+?) (.+?)( \{(.*?)\}){0,1}( for (\d*\.{0,1}\d*)s){0,1}( after (\d*\.{0,1}\d*)s){0,1}$')
+    g = re.compile(r'^(.+?)(?<!,) (.+?)( \{(.*?)\}){0,1}( for (\d*\.{0,1}\d*)s){0,1}( after (\d*\.{0,1}\d*)s){0,1}$')
     (selector, effect, args, duration, delay) = g.search(line).group(1, 2, 4, 6, 8)
     trans_dict = {'selector': selector}
 
@@ -60,20 +61,21 @@ def parseTransition(line):
         trans_dict['add'] = effect == 'addClass'
 
     elif effect == 'flyOutRight':
-        trans_dict['effect'] = 'translate'
-        trans_dict['value'] = ['100cqw', '0']
+        trans_dict['effect'] = 'transform'
+        trans_dict['value'] = 'translateX(100cqw)'
     elif effect == 'flyOutLeft':
-        trans_dict['effect'] = 'translate'
-        trans_dict['value'] = ['-100cqw', '0']
+        trans_dict['effect'] = 'transform'
+        trans_dict['value'] = 'translateX(-100cqw)'
     elif effect == 'flyOutTop':
-        trans_dict['effect'] = 'translate'
-        trans_dict['value'] = ['0', '-100cqh']
+        trans_dict['effect'] = 'transform'
+        trans_dict['value'] = 'translateY(-100cqh)'
     elif effect == 'flyOutBottom':
-        trans_dict['effect'] = 'translate'
-        trans_dict['value'] = ['0', '100cqh']
-    elif effect == 'translate':
-        trans_dict['effect'] = 'translate'
-        trans_dict['value'] = args.strip().split(', ')
+        trans_dict['effect'] = 'transform'
+        trans_dict['value'] = 'translateY(100cqh)'
+
+    elif effect == 'transform':
+        trans_dict['effect'] = 'transform'
+        trans_dict['value'] = args.strip()
 
     elif effect == 'style':
         trans_dict['effect'] = 'style'

@@ -11,5 +11,6 @@ The `outputFolder` will contain the presentation `HTML` along with its supportin
 This `HTML` can be opened in most modern browsers.
 
 In `work files`, there are example presentations that contain some example input and output.
-`basicPres0` contains example input and output files conceptualized before making the DSL.
-`testPres0` has the same presentation, but it can be compiled from the `input` folder and generates the `output` folder.
+[`basicPres0`](<https://hmc-cs111-spring2023.github.io/project-code-occamkg/work%20files/basicPres0/example%20output/>) contains example input and output files conceptualized before making the DSL.
+[`testPres0`](<https://hmc-cs111-spring2023.github.io/project-code-occamkg/work%20files/testPres0/output/>) has the same presentation, but it can be compiled from the `input` folder and generates the `output` folder.
+[`testPres1`](<https://hmc-cs111-spring2023.github.io/project-code-occamkg/work%20files/testPres1/example%20output/>) has a completely different presentation testing some added features.

@@ -1,0 +1,44 @@
+* {
+    transition: all 0.5s;
+}
+#bg {
+    background: #000;
+}
+
+#canvas {
+    background: slateblue;
+    aspect-ratio: 21/9;
+}
+
+.content {
+    padding: 2%;
+}
+
+.title {
+    font-size: 6cqw;
+    font-weight: bold;
+    font-family: 'Franklin Gothic', 'Arial Narrow', Arial, sans-serif;
+    margin-bottom: 0.5em;
+}
+.subtitle {
+    font-size: 3cqw;
+    font-weight: lighter;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif
+}
+
+.header-text {
+    font-size: 2cqw;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: bold;
+    text-decoration: underline;
+    margin-bottom: 0.5em;
+}
+.body-text {
+    font-size: 1.5cqw;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    line-height: 1.5em;
+}
+
+.blur {
+    filter: blur(0.5cqw);
+}

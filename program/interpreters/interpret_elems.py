@@ -52,13 +52,16 @@ def parseFile(in_file, out_file):
         if elem_name not in keep:
             complete_elements.pop(elem_name)
 
-    doc = t.parse(os.path.join(path.parent, 'default', 'default.html'))
+    doc = t.parse(os.path.join(path.parent, 'default', 'default.html'), t.XMLParser(remove_blank_text = True))
     canvas = doc.getroot().cssselect('#canvas')[0]
     i = 0
     for elem in complete_elements:
-        full_pane = t.Element('div')
-        full_pane.attrib['class'] = 'full content'
-        full_pane.append(complete_elements[elem])
+        if ('class' in complete_elements[elem].attrib and 'full' in complete_elements[elem].attrib['class']):
+            full_pane = complete_elements[elem]
+        else:
+            full_pane = t.Element('div')
+            full_pane.attrib['class'] = 'full content'
+            full_pane.append(complete_elements[elem])
         canvas.insert(i, full_pane)
         i += 1
 
@@ -113,7 +116,8 @@ def parseElem(raw_elem, id):
 
 
 
-    e.attrib['id'] = id
+    if (id != '_'):
+        e.attrib['id'] = id
     class_list = ''
     if 'class' in raw_elem:
         class_list += raw_elem['class']
@@ -127,7 +131,8 @@ def parseElem(raw_elem, id):
     if 'size' in raw_elem:
         class_list += f' {raw_elem["size"]}'
 
-    e.attrib['class'] = class_list
+    if class_list != '':
+        e.attrib['class'] = class_list
     
     style = ''
     if 'style' in raw_elem:

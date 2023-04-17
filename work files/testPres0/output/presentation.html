@@ -1,17 +1,43 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Presentation Title</title>
-        <link rel="stylesheet" href="default/default.css"/>
-        <link rel="stylesheet" href="user_style.css"/>
-        <script type="text/javascript" src="frames.js"> </script>
-        <script type="text/javascript" src="default/default.js"> </script>
-    </head>
-    <body>
-        <div id="bg">
-            <div id="canvas">
-                <div class="full content"><div id="title-frame-box" class=" center-x center-y" style=""><p id="main-title" class="title-text center-x" style="color: #0960a7;">Presentation Title</p><p id="subtitle" class="subtitle-text" style="color: #3590db;">Subtitle</p></div></div><div class="full content"><div id="pane-box" class="" style=""><p id="example-pane-title" class="pane-title" style="">Pane Title</p><ul id="example-content" class="" style=""><li id="item-1" class="basic-text" style="">Example text 1</li><li id="item-2" class="basic-text" style="">Example text 2</li><li id="item-3" class="basic-text" style="">Example text 3</li></ul></div></div><div id="cover"/>
-            </div>
+  <head>
+    <title>Presentation Title</title>
+    <link rel="stylesheet" href="default/default.css"/>
+    <link rel="stylesheet" href="user_style.css"/>
+    <script src="https://unpkg.com/feather-icons"> </script>
+    <script type="text/javascript" src="frames.js"> </script>
+    <script type="text/javascript" src="default/default.js"> </script>
+  </head>
+  <body>
+    <div id="bg">
+      <div id="canvas">
+        <div class="full content">
+          <div id="title-frame-box" class=" center-x center-y" style="">
+            <p id="main-title" class="title-text center-x" style="color: #0960a7;">Presentation Title</p>
+            <p id="subtitle" class="subtitle-text" style="color: #3590db;">Subtitle</p>
+          </div>
         </div>
-    </body>
+        <div class="full content">
+          <div id="pane-box" style="">
+            <p id="example-pane-title" class="pane-title" style="">Pane Title</p>
+            <ul id="example-content" style="">
+              <li id="item-1" class="basic-text" style="">Example text 1</li>
+              <li id="item-2" class="basic-text" style="">Example text 2</li>
+              <li id="item-3" class="basic-text" style="">Example text 3</li>
+            </ul>
+          </div>
+        </div>
+        <div id="frame-navigation">
+          <button id="back-frame" onclick="backKeyframe()">
+            <i data-feather="chevron-left"> </i>
+          </button>
+          <input id="frame-num" class="nav-frame-num" onclick="this.select()" onchange="goToKeyframe(this.value)"/>
+          <button id="fwd-frame" onclick="advanceKeyframe()">
+            <i data-feather="chevron-right"> </i>
+          </button>
+        </div>
+        <div id="cover"/>
+      </div>
+    </div>
+  </body>
 </html>

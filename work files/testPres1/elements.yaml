@@ -1,0 +1,78 @@
+# Title frame
+title-page:
+    content:
+        - main-title:
+            text: "Presentation with Images"
+            class: title
+            align: center-x
+            style: 'color: firebrick;
+                    text-shadow: -0.2cqw 0.2cqw 0.2cqw goldenrod'
+        - subtitle:
+            text: "(yet another test)"
+            class: subtitle
+            style: 'color: goldenrod;'
+    align: center-xy
+
+
+# Images
+img1:
+    img: https://picsum.photos/seed/123/1000
+    class: random-img
+    style: 'height: 100%'
+    align: center-x
+img2:
+    img: https://picsum.photos/seed/42/1000
+    class: random-img
+    style: 'height: 100%'
+    align: center-x
+img3:
+    img: https://picsum.photos/seed/0/1000
+    class: random-img
+    style: 'height: 100%'
+    align: center-x
+
+# Image text
+img-text:
+    content: [text1, text2, text3]
+    class: columns
+    style: 'padding-left: 20cqw;
+            row-gap: 5%;
+            z-index: -1;'
+text1:
+    content:
+        - _:
+            text: Isn't this picture cool?
+            class: header-text
+        - _:
+            text: "In turkey porchetta lorem, fatback strip steak ad pastrami. 
+                   Frankfurter elit ipsum shoulder, bacon chuck labore ground round salami in occaecat culpa rump nisi sed."
+            class: body-text
+text2:
+    content:
+        - _:
+            text: Here's another picture!
+            class: header-text
+        - _:
+            text: "Jerky laborum short loin, id frankfurter adipisicing anim pastrami eu veniam qui aliquip cupim.
+                   Jerky incididunt ham hock, flank spare ribs anim hamburger frankfurter nulla in."
+            class: body-text
+text3:
+    content:
+        - _:
+            text: Wow, three whole pictures
+            class: header-text
+        - _:
+            text: "Adipisicing in aliqua capicola flank, pork chop turkey officia dolore strip steak kevin fugiat tongue anim laborum.
+                   Pig cupidatat filet mignon voluptate, id meatloaf nostrud ullamco meatball strip steak."
+            class: body-text
+
+# PUPPY!
+closing:
+    content:
+        - _:
+            text: "Here's a puppy!"
+            style: 'color: cornflowerblue;
+                    text-shadow: -0.1cqw 0.1cqw black'
+            align: center-xy
+    class: title full
+    style: 'background-image: url("https://image.cnbcfm.com/api/v1/image/105992231-1561667465295gettyimages-521697453.jpeg?v=1561667497&w=1920&h=1080")'

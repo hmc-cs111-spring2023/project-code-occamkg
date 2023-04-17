@@ -10,11 +10,8 @@ allFrames = [
     [
         {
             "selector": "#title-frame-box",
-            "effect": "translate",
-            "value": [
-                "100cqw",
-                "0"
-            ]
+            "effect": "transform",
+            "value": "translateX(100cqw)"
         },
         {
             "selector": "#example-pane-title",
