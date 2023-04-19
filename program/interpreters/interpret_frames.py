@@ -25,16 +25,16 @@ def parseFrames(in_file, out_file):
     file.close()
 
 def parseTransitionSet(set):
-    delay = 0
     commands = []
     time_groups = re.split(' then ', set)
     for group in time_groups:
+        sub_commands = []
         animations = re.split(' and ', group)
         for animation in animations:
             if (len(animation.strip()) > 0):
                 command_group = parseTransition(animation.strip())
-                commands.append(command_group)
-        # delay = newDelay
+                sub_commands.append(command_group)
+        commands.append(sub_commands)
 
     return commands
 
