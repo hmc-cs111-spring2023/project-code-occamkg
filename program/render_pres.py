@@ -31,7 +31,7 @@ def prompt_file(in_path, file_type):
             file = input(f'Enter the name of the {file_type} file you would like to use from {files}')
         return file
 
-def run(in_path, out_path):
+def render_pres(in_path, out_path):
     if os.path.isdir(os.path.join(out_path, 'default')):
         shutil.rmtree(os.path.join(out_path, 'default'))
     shutil.copytree(os.path.join(program_path, 'default'), os.path.join(out_path, 'default'))
@@ -55,4 +55,4 @@ if __name__ == '__main__':
     if len(sys.argv) > 2:
         out_path = sys.argv[2]
     
-    run(in_path, out_path)
+    render_pres(in_path, out_path)

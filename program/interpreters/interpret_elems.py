@@ -67,6 +67,13 @@ def parseFile(in_file, out_file):
 
     doc.getroot().cssselect('#canvas')[0].getparent().replace(doc.getroot().cssselect('#canvas')[0], canvas)
 
+    config = open(os.path.join(Path(in_file).parent, '.config'))
+    config_data = yaml.safe_load(config)
+    config.close()
+
+    if ('name' in config_data):
+        doc.getroot().cssselect('title')[0].text = config_data['name']
+
     file = open(out_file, 'w')
     file.write(t.tostring(doc, pretty_print = True, encoding = 'unicode'))
     file.close()
