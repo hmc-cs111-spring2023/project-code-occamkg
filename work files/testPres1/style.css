@@ -1,5 +1,5 @@
 * {
-    transition: all 0.5s;
+    transition: all 0.3s;
 }
 #bg {
     background: #000;
@@ -40,5 +40,5 @@
 }
 
 .blur {
-    filter: blur(0.5cqw);
+    filter: blur(0.3cqw);
 }

@@ -1,21 +1,22 @@
 // Title
 --> #title-page show
+--> #title-page flyOutTop
 
 // Images
---> #title-page flyOutTop
     then #img1 show
 --> #img1 transform {translate(-95%, -35%) scale(0.3)}
-    and #text1 show
+    then #text1 show
 --> #img-text addClass {blur}
     and #img2 show
 --> #img2 transform {translateX(-95%) scale(0.3)}
     and #img-text removeClass {blur}
-    and #text2 show
+    then #text2 show
 --> #img-text addClass {blur}
     and #img3 show
 --> #img3 transform {translate(-95%, 35%) scale(0.3)}
     and #img-text removeClass {blur}
-    and #text3 show
-
+    then #text3 show
 --> .random-img, #img-text flyOutLeft
-    and #closing show
+
+// Puppy
+    then #closing show

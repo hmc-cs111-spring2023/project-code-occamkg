@@ -5,7 +5,8 @@ allFrames = [
                 "selector": "#title-frame-box",
                 "effect": "class",
                 "value": "show",
-                "add": true
+                "add": true,
+                "propagate": true
             }
         ]
     ],
@@ -22,7 +23,8 @@ allFrames = [
                 "selector": "#example-pane-title",
                 "effect": "class",
                 "value": "show",
-                "add": true
+                "add": true,
+                "propagate": true
             }
         ]
     ],
@@ -32,7 +34,8 @@ allFrames = [
                 "selector": "#item-1",
                 "effect": "class",
                 "value": "show",
-                "add": true
+                "add": true,
+                "propagate": true
             }
         ]
     ],
@@ -42,7 +45,8 @@ allFrames = [
                 "selector": "#item-2",
                 "effect": "class",
                 "value": "show",
-                "add": true
+                "add": true,
+                "propagate": true
             },
             {
                 "selector": "#item-1",
@@ -58,7 +62,8 @@ allFrames = [
                 "selector": "#item-3",
                 "effect": "class",
                 "value": "show",
-                "add": true
+                "add": true,
+                "propagate": true
             },
             {
                 "selector": "#item-2",

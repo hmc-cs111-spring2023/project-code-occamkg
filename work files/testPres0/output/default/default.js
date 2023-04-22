@@ -11,32 +11,49 @@ function advanceKeyframe() {
 function advanceFramePart(i, frame) {
     if (i < allFrames[frame].length) {
         console.log(`advancing part ${i} of keyframe ${frame}`);
-        let last_elem;
+        let lastTrans = allFrames[frame][i][allFrames[frame][i].length - 1];
+        let lastElem = document.querySelectorAll(lastTrans.selector)[0];
+        lastElem.addEventListener('transitionend',
+                                  advanceFramePart.bind(null, i + 1, frame),
+                                  {once: true});
         for (let transition of allFrames[frame][i]) {
             let elems = document.querySelectorAll(transition.selector);
             for (let elem of elems) {
-                switch (transition.effect) {
-                    case 'class':
-                        if (transition.add) {
-                            elem.classList.add(transition.value);
-                        }
-                        else {
-                            elem.classList.remove(transition.value);
-                        }
-                        break;
-                    case 'transform':
-                        elem.style.transform += transition.value;
-                        break;
-                    case 'style':
-                        elem.style.cssText = `${elem.style.cssText} ${transition.value}`;
-                        break;
+                let propUp = false;
+                let propDown = false;
+                if (transition.propagate) {
+                    propUp = true;
+                    propDown = true;
                 }
-                last_elem = elem;
+                addTransition(elem, transition, propUp, propDown);
             }
         }
-        last_elem.addEventListener('transitionend',
-                                   advanceFramePart.bind(null, i + 1, frame),
-                                   {once: true});
+    }
+}
+function addTransition(elem, transition, propagateUp = false, propagateDown = false) {
+    switch (transition.effect) {
+        case 'class':
+            if (transition.add) {
+                elem.classList.add(transition.value);
+            }
+            else {
+                elem.classList.remove(transition.value);
+            }
+            break;
+        case 'transform':
+            elem.style.transform += transition.value;
+            break;
+        case 'style':
+            elem.style.cssText = `${elem.style.cssText} ${transition.value}`;
+            break;
+    }
+    if (propagateUp && elem.parentElement.id != 'canvas') {
+        addTransition(elem.parentElement, transition, true, false);
+    }
+    if (propagateDown) {
+        for (child of elem.children) {
+            addTransition(child, transition, false, true);
+        }
     }
 }
 
@@ -50,30 +67,36 @@ function backKeyframe() {
 function backFramePart(i, frame) {
     if (i >= 0) {
         console.log(`reversing part ${i} of keyframe ${frame}`);
-        let last_elem;
+        let lastTrans = allFrames[frame][i][allFrames[frame][i].length - 1];
+        let lastElem = document.querySelectorAll(lastTrans.selector)[0];
+        lastElem.addEventListener('transitionend',
+                                  backFramePart.bind(null, i - 1, frame),
+                                  {once: true});
         for (let transition of allFrames[frame][i]) {
             let elems = document.querySelectorAll(transition.selector);
             for (let elem of elems) {
-                switch (transition.effect) {
-                    case 'class':
-                        if (transition.add) {
-                            elem.classList.remove(transition.value);
-                        }
-                        else {
-                            elem.classList.add(transition.value);
-                        }
-                        break;
-                    case 'transform':
-                        elem.style.transform = elem.style.transform.replace(transition.value, '');
-                        break;
-                    case 'style':
-                        elem.style.cssText = elem.style.cssText.replace(transition.value, '');
-                        break;
-                }
-                last_elem = elem;
+                console.log(elem, transition);
+                removeTransition(elem, transition);
             }
         }
-        last_elem.addEventListener('transitionend', backFramePart.bind(null, i - 1, frame), {once: true});
+    }
+}
+function removeTransition(elem, transition) {
+    switch (transition.effect) {
+        case 'class':
+            if (transition.add) {
+                elem.classList.remove(transition.value);
+            }
+            else {
+                elem.classList.add(transition.value);
+            }
+            break;
+        case 'transform':
+            elem.style.transform = elem.style.transform.replace(transition.value, '');
+            break;
+        case 'style':
+            elem.style.cssText = elem.style.cssText.replace(transition.value, '');
+            break;
     }
 }
 
@@ -156,7 +179,7 @@ window.addEventListener('keydown', function(e) {
 // })
 
 window.addEventListener('load', function() {
-    hideElements();
+    // hideElements();
     feather.replace();
     document.getElementById('cover').classList.add('hide');
 

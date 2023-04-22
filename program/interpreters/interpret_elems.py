@@ -138,8 +138,8 @@ def parseElem(raw_elem, id):
     if 'size' in raw_elem:
         class_list += f' {raw_elem["size"]}'
 
-    if class_list != '':
-        e.attrib['class'] = class_list
+    class_list += ' hide'
+    e.attrib['class'] = class_list
     
     style = ''
     if 'style' in raw_elem:

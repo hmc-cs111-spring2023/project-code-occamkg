@@ -16,17 +16,17 @@ title-page:
 
 # Images
 img1:
-    img: https://picsum.photos/seed/62/1000
+    img: https://picsum.photos/seed/65/1200
     class: random-img
     style: 'height: 100%'
     align: center-x
 img2:
-    img: https://picsum.photos/seed/42/1000
+    img: https://picsum.photos/seed/81/1200
     class: random-img
     style: 'height: 100%'
     align: center-x
 img3:
-    img: https://picsum.photos/seed/0/1000
+    img: https://picsum.photos/seed/0/1200
     class: random-img
     style: 'height: 100%'
     align: center-x

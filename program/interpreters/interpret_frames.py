@@ -55,6 +55,8 @@ def parseTransition(line):
         trans_dict['effect'] = 'class'
         trans_dict['value'] = 'show'
         trans_dict['add'] = effect == 'show'
+        if (trans_dict['add']):
+            trans_dict['propagate'] = True
     elif effect == 'addClass' or effect == 'removeClass':
         trans_dict['effect'] = 'class'
         trans_dict['value'] = args.strip()
