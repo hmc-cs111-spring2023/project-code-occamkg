@@ -10,7 +10,7 @@ function advanceKeyframe() {
 }
 function advanceFramePart(i, frame) {
     if (i < allFrames[frame].length) {
-        console.log(`advancing part ${i} of keyframe ${frame}`);
+        // console.log(`advancing part ${i} of keyframe ${frame}`);
         let lastTrans = allFrames[frame][i][allFrames[frame][i].length - 1];
         let lastElem = document.querySelectorAll(lastTrans.selector)[0];
         lastElem.addEventListener('transitionend',
@@ -66,7 +66,7 @@ function backKeyframe() {
 }
 function backFramePart(i, frame) {
     if (i >= 0) {
-        console.log(`reversing part ${i} of keyframe ${frame}`);
+        // console.log(`reversing part ${i} of keyframe ${frame}`);
         let lastTrans = allFrames[frame][i][allFrames[frame][i].length - 1];
         let lastElem = document.querySelectorAll(lastTrans.selector)[0];
         lastElem.addEventListener('transitionend',
@@ -75,7 +75,6 @@ function backFramePart(i, frame) {
         for (let transition of allFrames[frame][i]) {
             let elems = document.querySelectorAll(transition.selector);
             for (let elem of elems) {
-                console.log(elem, transition);
                 removeTransition(elem, transition);
             }
         }

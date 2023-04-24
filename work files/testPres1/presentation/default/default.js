@@ -11,7 +11,11 @@ function advanceKeyframe() {
 function advanceFramePart(i, frame) {
     if (i < allFrames[frame].length) {
         console.log(`advancing part ${i} of keyframe ${frame}`);
-        let lastElem;
+        let lastTrans = allFrames[frame][i][allFrames[frame][i].length - 1];
+        let lastElem = document.querySelectorAll(lastTrans.selector)[0];
+        lastElem.addEventListener('transitionend',
+                                  advanceFramePart.bind(null, i + 1, frame),
+                                  {once: true});
         for (let transition of allFrames[frame][i]) {
             let elems = document.querySelectorAll(transition.selector);
             for (let elem of elems) {
@@ -22,12 +26,8 @@ function advanceFramePart(i, frame) {
                     propDown = true;
                 }
                 addTransition(elem, transition, propUp, propDown);
-                lastElem = elem;
             }
         }
-        lastElem.addEventListener('transitionend',
-                                   advanceFramePart.bind(null, i + 1, frame),
-                                   {once: true});
     }
 }
 function addTransition(elem, transition, propagateUp = false, propagateDown = false) {
@@ -67,15 +67,18 @@ function backKeyframe() {
 function backFramePart(i, frame) {
     if (i >= 0) {
         console.log(`reversing part ${i} of keyframe ${frame}`);
-        let lastElem;
+        let lastTrans = allFrames[frame][i][allFrames[frame][i].length - 1];
+        let lastElem = document.querySelectorAll(lastTrans.selector)[0];
+        lastElem.addEventListener('transitionend',
+                                  backFramePart.bind(null, i - 1, frame),
+                                  {once: true});
         for (let transition of allFrames[frame][i]) {
             let elems = document.querySelectorAll(transition.selector);
             for (let elem of elems) {
+                console.log(elem, transition);
                 removeTransition(elem, transition);
-                lastElem = elem;
             }
         }
-        lastElem.addEventListener('transitionend', backFramePart.bind(null, i - 1, frame), {once: true});
     }
 }
 function removeTransition(elem, transition) {
