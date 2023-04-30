@@ -4,6 +4,8 @@
 This DSL aims to increase the flexibility and fluidity of presentations by allowing users to control individual element parameters beyond "show" and "hide" with each advance control.
 
 ## Downloading and Setup
+Before using this DSL, python must be installed along with `pyyaml`, `lxml`, and `cssselect` (all available with `pip install`).
+
 The source code is contained in the `reframe` folder.
 Once downloaded, the DSL can be run from the `reframe.py` script.
 
