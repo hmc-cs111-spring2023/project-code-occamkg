@@ -1,5 +1,6 @@
 let currentKeyframe = -1;
 let URLparams = new URLSearchParams(location.search);
+let isFullscreen = false;
 
 function advanceKeyframe() {
     if (currentKeyframe + 1 < allFrames.length) {
@@ -136,27 +137,32 @@ function goToKeyframe(keyframe) {
     document.body.classList.remove('no-transition');
 }
 
-function hideElements() {
-    document.body.classList.add('no-transition');
-    for (frame of allFrames) {
-        for (framePart of frame) {
-            for (transition of framePart) {
-                if (transition.effect == 'class' && transition.value == 'show') {
-                    let elems = document.querySelectorAll(transition.selector);
-                    for (let elem of elems) {
-                        if (transition.add && !elem.classList.contains('show')) {
-                            elem.classList.add('hide');
-                        }
-                        else if (!transition.add && !elem.classList.contains('hide')) {
-                            elem.classList.add('hide');
-                            elem.classList.add('show');
-                        }
-                    }
-                }
-            }
+function fullscreen() {
+    if (isFullscreen) {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) { /* Safari */
+            document.webkitExitFullscreen();
         }
+        document.getElementById('fullscreen-top').setAttribute('transform', '');
+        document.getElementById('fullscreen-bottom').setAttribute('transform', '');
+        document.getElementById('fullscreen-left').setAttribute('transform', '');
+        document.getElementById('fullscreen-right').setAttribute('transform', '');
+        document.getElementById('controls').style.opacity = 1;
     }
-    document.body.classList.remove('no-transition');
+    else {
+        if (document.body.requestFullscreen) {
+            document.body.requestFullscreen();
+        } else if (document.body.webkitRequestFullscreen) { /* Safari */
+            document.body.webkitRequestFullscreen();
+        }
+        document.getElementById('fullscreen-top').setAttribute('transform', 'translate(0, 10)');
+        document.getElementById('fullscreen-bottom').setAttribute('transform', 'translate(0, -10)');
+        document.getElementById('fullscreen-left').setAttribute('transform', 'translate(10, 0)');
+        document.getElementById('fullscreen-right').setAttribute('transform', 'translate(-10, 0)');
+        // document.getElementById('controls').style.opacity = 0;
+    }
+    isFullscreen = !isFullscreen;
 }
 
 window.addEventListener('keydown', function(e) {
@@ -178,8 +184,6 @@ window.addEventListener('keydown', function(e) {
 // })
 
 window.addEventListener('load', function() {
-    // hideElements();
-    feather.replace();
     document.getElementById('cover').classList.add('hide');
 
     if (URLparams.has('frame')) {

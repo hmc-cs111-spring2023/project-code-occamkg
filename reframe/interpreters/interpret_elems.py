@@ -9,6 +9,8 @@ from copy import deepcopy
 path = Path(__file__).parent
 
 def parseFile(in_file, out_file):
+    asset_path = os.path.join(Path(in_file).parent, 'assets')
+
     file = open(in_file, 'r')
     content = yaml.safe_load(file)
     file.close()
@@ -21,7 +23,7 @@ def parseFile(in_file, out_file):
         else:
             if ('render' in content[name] and content[name]['render']):
                 keep.add(name)
-            elements[name] = parseElem(content[name], name)
+            elements[name] = parseElem(content[name], name, asset_path)
 
     # move 'elements' (with possible REFERENCE elements)
     # to 'complete elements' (with REFERENCEs replaced by element copies)
@@ -79,7 +81,7 @@ def parseFile(in_file, out_file):
     file.close()
 
 
-def parseElem(raw_elem, id):
+def parseElem(raw_elem, id, asset_path):
     e = None
 
     if 'text' in raw_elem:
@@ -98,13 +100,13 @@ def parseElem(raw_elem, id):
         e = t.Element('ul')
         for item in raw_elem['ul']:
             item_id = list(item.keys())[0]
-            e.append(parseElem(item[item_id], item_id))
+            e.append(parseElem(item[item_id], item_id, asset_path))
 
     elif 'ol' in raw_elem:
         e = t.Element('ol')
         for item in raw_elem['ol']:
             item_id = list(item.keys())[0]
-            e.append(parseElem(item[item_id], item_id))
+            e.append(parseElem(item[item_id], item_id, asset_path))
 
     elif 'content' in raw_elem:
         e = t.Element('div')
@@ -116,10 +118,16 @@ def parseElem(raw_elem, id):
                 e.append(child)
             else:
                 elem_id = list(elem.keys())[0]
-                e.append(parseElem(elem[elem_id], elem_id))
+                e.append(parseElem(elem[elem_id], elem_id, asset_path))
+    elif 'svg' in raw_elem:
+        e = t.parse(os.path.join(asset_path, raw_elem['svg']),
+                    t.XMLParser(remove_blank_text = True)).getroot()
+    elif 'html' in raw_elem:
+        e = t.parse(os.path.join(asset_path, raw_elem['html']),
+                    t.XMLParser(remove_blank_text = True)).getroot()
 
     else:
-        raise NotImplementedError('Unrecognized element type')
+        raise NotImplementedError('Unrecognized element type for ' + id)
 
 
 

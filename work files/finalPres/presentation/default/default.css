@@ -36,6 +36,7 @@ li {
 }
 
 #canvas {
+    container-type: size;
     position: relative;
     background: #fff;
     max-width: 100%;
@@ -46,6 +47,7 @@ li {
     overflow: hidden;
     -webkit-user-select: none;
     user-select: none;
+    aspect-ratio: 16/9;
 }
 #cover {
     width: 100%;
@@ -67,9 +69,6 @@ li {
     transition: all 0.2s;
     z-index: 999;
     text-align: right;
-}
-#controls:hover {
-    opacity: 1;
 }
 #controls svg {
     stroke-width: 10;

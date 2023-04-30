@@ -1,11 +1,14 @@
-import interpreters.interpret_elems as ielem
-import interpreters.interpret_frames as iframe
+#!/usr/bin/env python
 
 import os
 import re
 import sys
 import shutil
+import yaml
 from pathlib import Path
+
+import interpreters.interpret_elems as ielem
+import interpreters.interpret_frames as iframe
 
 program_path = Path(__file__).parent
 
@@ -37,6 +40,11 @@ def render_pres(in_path, out_path):
     shutil.copytree(os.path.join(program_path, 'default'), os.path.join(out_path, 'default'))
     os.remove(os.path.join(out_path, 'default', 'default.html'))
 
+    if os.path.isdir(os.path.join(out_path, 'assets')):
+        shutil.rmtree(os.path.join(out_path, 'assets'))
+    if os.path.isdir(os.path.join(in_path, 'assets')):
+        shutil.copytree(os.path.join(in_path, 'assets'), os.path.join(out_path, 'assets'))
+
     style_file = prompt_file(in_path, 'style')
     if style_file != '':
         shutil.copy(os.path.join(in_path, style_file), os.path.join(out_path, 'user_style.css'))
@@ -47,12 +55,40 @@ def render_pres(in_path, out_path):
     ielem.parseFile(os.path.join(in_path, elem_file),
                     os.path.join(out_path, 'index.html'))
 
+def setup(dir):
+    if (not os.path.isdir(dir)):
+        os.mkdir(dir)
+    os.chdir(dir)
+    f = open('elements.yaml', 'w')
+    f.close()
+    f = open('frames.frame', 'w')
+    f.close()
+    f = open('style.css', 'w')
+    f.close()
+
+    name = input('What would you like to name the project? ')
+
+    out = input('Where would you like to output the presentation? ')
+
+    f = open('.config', 'w')
+    f.write('presentation: true\n')
+    f.write(f'name: "{name}"\n')
+    f.write(f'outpath: "{out}"\n')
+    f.close()
+
 if __name__ == '__main__':
-    in_path = os.getcwd()
-    if len(sys.argv) > 1:
-        in_path = sys.argv[1]
-    out_path = os.path.join(in_path, 'presentation')
-    if len(sys.argv) > 2:
-        out_path = sys.argv[2]
-    
-    render_pres(in_path, out_path)
+    wd = os.getcwd()
+    if len(sys.argv) == 2:
+        if (os.path.isdir(sys.argv[1])):
+            in_dir = sys.argv[1]
+            config_file = os.path.join(in_dir, '.config')
+            if os.path.isfile(config_file):
+                file = open(config_file, 'r')
+                config_data = yaml.safe_load(file)
+                file.close()
+                if ('presentation' in config_data and config_data['presentation']):
+                    os.chdir(in_dir)
+                    render_pres(in_dir, os.path.abspath(config_data['outpath']))
+                    os.chdir(wd)
+        elif (sys.argv[1]) == 'setup':
+            setup(wd)

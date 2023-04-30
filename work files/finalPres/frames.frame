@@ -1,0 +1,66 @@
+// initialize
+--> #logo show
+
+// animate logo
+--> #logo transform {rotate(180deg)}
+    then #logo-inner style {opacity: 0}
+    and #logo-lower-f, #logo-lower-l transform {translate(-15cqh, -15cqh)}
+    then #logo-lower-f style {opacity: 0}
+    then #logo-lower-l transform {translateX(-10cqh)}
+    and .logo-text show
+
+// show boring template
+--> #logo-group flyOutLeft
+    and #logo-group transform {translateY(-50%)}
+    and #logo-group hide
+    then #boring show
+
+// show example of boring content
+--> #boring flyOutTop
+    then #boring-2 show
+
+// show map
+--> #boring-2 flyOutTop
+    then #map show
+
+// Brazil
+--> #BR addClass {country-highlight}
+    and #anno1 show
+--> #map-box transform {translate(30cqw, -45cqh) scale(3)}
+    then #anno2 show and #anno2 style {width: 100%}
+--> #map-box transform {translate(-10cqw, 15cqh) scale(0.3333)}
+    and #brazil-anno hide
+
+// Indonesia
+--> .Indonesia addClass {country-highlight}
+    and #anno3 show
+--> #map-box transform {translate(-90cqw, -36cqh) scale(3)}
+    then #anno4 show and #anno4 style {width: 100%}
+--> #map-box transform {translate(30cqw, 12cqh) scale(0.3333)}
+    then #brazil-anno show
+
+// key features
+--> #map-box hide
+    then #features show
+// hide/show
+--> #features hide
+--> #features show
+// transform
+--> #features transform {translateY(-50%) rotate(-90deg)}
+--> #features transform {translateY(-40cqw)}
+--> #features transform {scale(0.5)}
+// style
+--> #features addClass {theme-text}
+--> #features style {opacity: 0.5}
+--> #features style {font-family: Verdana}
+    and #features style {font-weight: bold}
+    then #features style {font-style: italic}
+// graphics
+--> #feature-bg show
+    and #features style {opacity: 1}
+--> #logo-svg show
+
+// switch aspect ratio
+--> #canvas style {aspect-ratio: 3 / 4;}
+
+--> #feature-group hide

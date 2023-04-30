@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" height="100%" viewBox="0 0 80 80" stroke-width="10" stroke="#000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <rect width="80" height="80" rx="20" fill="#ffe"/>
+    <path id="fullscreen-top" d="M20 20H30M50 20H60" transform="translate(0, 10)"/>
+    <path id="fullscreen-bottom" d="M20 60H30M50 60H60" transform="translate(0, -10)"/>
+    <path id="fullscreen-left" d="M20 20V30M20 50V60" transform="translate(10, 0)"/>
+    <path id="fullscreen-left" d="M60 20V30M60 50V60" transform="translate(-10, 0)"/>
+</svg>

@@ -2,9 +2,9 @@
 <html>
   <head>
     <title>Image Test</title>
+    <link rel="icon" type="image/x-icon" href="default/logo-transparent.png"/>
     <link rel="stylesheet" href="default/default.css"/>
     <link rel="stylesheet" href="user_style.css"/>
-    <script src="https://unpkg.com/feather-icons"> </script>
     <script type="text/javascript" src="frames.js"> </script>
     <script type="text/javascript" src="default/default.js"> </script>
   </head>
@@ -45,13 +45,28 @@
             </div>
           </div>
         </div>
-        <div id="frame-navigation">
-          <button id="back-frame" onclick="backKeyframe()">
-            <i data-feather="chevron-left"> </i>
-          </button>
-          <input id="frame-num" class="nav-frame-num" onclick="this.select()" onchange="goToKeyframe(this.value)"/>
-          <button id="fwd-frame" onclick="advanceKeyframe()">
-            <i data-feather="chevron-right"> </i>
+        <div id="controls">
+          <div id="timeline"> </div>
+          <div id="frame-navigation">
+            <button id="back-frame" onclick="backKeyframe()">
+              <svg height="100%" viewBox="0 0 80 80">
+                <path d="M50 20L30 40L50 60"/>
+              </svg>
+            </button>
+            <input id="frame-num" class="nav-frame-num" onclick="this.select()" onchange="goToKeyframe(this.value)"/>
+            <button id="fwd-frame" onclick="advanceKeyframe()">
+              <svg height="100%" viewBox="0 0 80 80">
+                <path d="M30 20L50 40L30 60"/>
+              </svg>
+            </button>
+          </div>
+          <button id="fullscreen" onclick="fullscreen()">
+            <svg height="100%" viewBox="0 0 80 80">
+              <path id="fullscreen-top" d="M20 20H30M50 20H60"/>
+              <path id="fullscreen-bottom" d="M20 60H30M50 60H60"/>
+              <path id="fullscreen-left" d="M20 20V30M20 50V60"/>
+              <path id="fullscreen-right" d="M60 20V30M60 50V60"/>
+            </svg>
           </button>
         </div>
         <div id="cover"/>

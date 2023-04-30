@@ -1,6 +1,7 @@
 let currentKeyframe = -1;
 let URLparams = new URLSearchParams(location.search);
 let isFullscreen = false;
+let throughTransitions = false;
 
 function advanceKeyframe() {
     if (currentKeyframe + 1 < allFrames.length) {
@@ -12,11 +13,16 @@ function advanceKeyframe() {
 function advanceFramePart(i, frame) {
     if (i < allFrames[frame].length) {
         console.log(`advancing part ${i} of keyframe ${frame}`);
-        let lastTrans = allFrames[frame][i][allFrames[frame][i].length - 1];
-        let lastElem = document.querySelectorAll(lastTrans.selector)[0];
-        lastElem.addEventListener('transitionend',
-                                  advanceFramePart.bind(null, i + 1, frame),
-                                  {once: true});
+        if (throughTransitions) {
+            advanceFramePart(i + 1, frame);
+        }
+        else {
+            let lastTrans = allFrames[frame][i][allFrames[frame][i].length - 1];
+            let lastElem = document.querySelectorAll(lastTrans.selector)[0];
+            lastElem.addEventListener('transitionend',
+                                    advanceFramePart.bind(null, i + 1, frame),
+                                    {once: true});
+        }
         for (let transition of allFrames[frame][i]) {
             let elems = document.querySelectorAll(transition.selector);
             for (let elem of elems) {
@@ -72,11 +78,16 @@ function backKeyframe() {
 function backFramePart(i, frame) {
     if (i >= 0) {
         console.log(`reversing part ${i} of keyframe ${frame}`);
-        let lastTrans = allFrames[frame][i][allFrames[frame][i].length - 1];
-        let lastElem = document.querySelectorAll(lastTrans.selector)[0];
-        lastElem.addEventListener('transitionend',
-                                  backFramePart.bind(null, i - 1, frame),
-                                  {once: true});
+        if (throughTransitions) {
+            advanceFramePart(i + 1, frame);
+        }
+        else {
+            let lastTrans = allFrames[frame][i][allFrames[frame][i].length - 1];
+            let lastElem = document.querySelectorAll(lastTrans.selector)[0];
+            lastElem.addEventListener('transitionend',
+                                    backFramePart.bind(null, i - 1, frame),
+                                    {once: true});
+        }
         for (let transition of allFrames[frame][i]) {
             let elems = document.querySelectorAll(transition.selector);
             for (let elem of elems) {
@@ -127,6 +138,7 @@ function updateKeyframe() {
 
 function goToKeyframe(keyframe) {
     document.body.classList.add('no-transition');
+    throughTransitions = true;
     if (keyframe >= 0 && keyframe < allFrames.length) {
         while (currentKeyframe < keyframe) {
             advanceKeyframe();
@@ -138,6 +150,7 @@ function goToKeyframe(keyframe) {
     else {
         goToKeyframe(0);
     }
+    throughTransitions = false;
     document.body.classList.remove('no-transition');
 }
 

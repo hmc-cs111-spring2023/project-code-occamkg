@@ -1,0 +1,111 @@
+logo-group:
+    align: center-xy
+    content:
+        - logo:
+            style: "transform: rotate(-180deg)"
+            align: center-x
+            content:
+                - logo-inner:
+                    img: "assets/logo_inner.png"
+                - _:
+                    img: "assets/logo_upper_f.png"
+                - logo-lower-f:
+                    img: "assets/logo_lower_f.png"
+                - logo-lower-l:
+                    img: "assets/logo_lower_l.png"
+        - re:
+            text: "re"
+            class: logo-text theme-text
+            style: "transform: translate(-25cqh, 8cqh)"
+        - rame:
+            text: "rame"
+            class: logo-text theme-text
+            style: "transform: translate(17.5cqh, 15cqh)"
+
+boring:
+    content:
+        - _:
+            text: "Click to add title"
+            class: boring-text boring-title
+        - _:
+            class: boring-content
+            content:
+                - _:
+                    text: "Click to add text"
+                    class: boring-text boring-body
+                - _:
+                    class: boring-img
+                    align: center-xy
+                    style: "padding: 10cqh 30cqh; opacity: 0.5"
+                    img: assets/addimg.png
+
+boring-2:
+    content:
+        - _:
+            text: "Does every slide need a title?"
+            class: boring-text boring-title
+        - _:
+            class: boring-content
+            content:
+                - _:
+                    class: boring-text boring-body
+                    content:
+                        - _:
+                            text: "Lots of text can make people lose interest"
+                        - _:
+                            ul:
+                                - _:
+                                    item: "Bullet"
+                                - _:
+                                    item: "Points"
+                                - _:
+                                    item: "Can"
+                                - _:
+                                    item: "Get"
+                                - _:
+                                    item: "Bland"
+                                - _:
+                                    item: "Quickly"
+                - _:
+                    class: boring-img
+                    align: center-y
+                    img: assets/irrelevant.jpg
+
+map-box:
+    class: full
+    content:
+        - map:
+            svg: world.svg
+            class: full
+        - brazil-anno:
+            class: map-anno
+            style: "transform: translate(40cqw, 65cqh)"
+            content:
+                - anno1:
+                    text: "Brazil"
+                - anno2:
+                    text: "population: 214.3M"
+                    class: small-anno
+        - indonesia-anno:
+            class: map-anno
+            style: "transform: translate(68cqw, 60cqh)"
+            content:
+                - anno3:
+                    text: "Indonesia"
+                - anno4:
+                    text: "population: 273.8M"
+                    class: small-anno
+
+feature-group:
+    class: full
+    content:
+        - feature-bg:
+            class: full
+            text: ""
+        - features:
+            text: "Features"
+            align: center-xy
+        - logo-svg:
+            class: full
+            svg: logo.svg
+

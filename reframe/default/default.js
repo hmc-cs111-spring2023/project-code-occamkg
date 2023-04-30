@@ -1,5 +1,7 @@
 let currentKeyframe = -1;
 let URLparams = new URLSearchParams(location.search);
+let isFullscreen = false;
+let throughTransitions = false;
 
 function advanceKeyframe() {
     if (currentKeyframe + 1 < allFrames.length) {
@@ -10,12 +12,17 @@ function advanceKeyframe() {
 }
 function advanceFramePart(i, frame) {
     if (i < allFrames[frame].length) {
-        // console.log(`advancing part ${i} of keyframe ${frame}`);
-        let lastTrans = allFrames[frame][i][allFrames[frame][i].length - 1];
-        let lastElem = document.querySelectorAll(lastTrans.selector)[0];
-        lastElem.addEventListener('transitionend',
-                                  advanceFramePart.bind(null, i + 1, frame),
-                                  {once: true});
+        console.log(`advancing part ${i} of keyframe ${frame}`);
+        if (throughTransitions) {
+            advanceFramePart(i + 1, frame);
+        }
+        else {
+            let lastTrans = allFrames[frame][i][allFrames[frame][i].length - 1];
+            let lastElem = document.querySelectorAll(lastTrans.selector)[0];
+            lastElem.addEventListener('transitionend',
+                                    advanceFramePart.bind(null, i + 1, frame),
+                                    {once: true});
+        }
         for (let transition of allFrames[frame][i]) {
             let elems = document.querySelectorAll(transition.selector);
             for (let elem of elems) {
@@ -46,6 +53,10 @@ function addTransition(elem, transition, propagateUp = false, propagateDown = fa
         case 'style':
             elem.style.cssText = `${elem.style.cssText} ${transition.value}`;
             break;
+        // case 'animation':
+        //     if (transition.loop) {
+
+        //     }
     }
     if (propagateUp && elem.parentElement.id != 'canvas') {
         addTransition(elem.parentElement, transition, true, false);
@@ -66,12 +77,17 @@ function backKeyframe() {
 }
 function backFramePart(i, frame) {
     if (i >= 0) {
-        // console.log(`reversing part ${i} of keyframe ${frame}`);
-        let lastTrans = allFrames[frame][i][allFrames[frame][i].length - 1];
-        let lastElem = document.querySelectorAll(lastTrans.selector)[0];
-        lastElem.addEventListener('transitionend',
-                                  backFramePart.bind(null, i - 1, frame),
-                                  {once: true});
+        console.log(`reversing part ${i} of keyframe ${frame}`);
+        if (throughTransitions) {
+            advanceFramePart(i + 1, frame);
+        }
+        else {
+            let lastTrans = allFrames[frame][i][allFrames[frame][i].length - 1];
+            let lastElem = document.querySelectorAll(lastTrans.selector)[0];
+            lastElem.addEventListener('transitionend',
+                                    backFramePart.bind(null, i - 1, frame),
+                                    {once: true});
+        }
         for (let transition of allFrames[frame][i]) {
             let elems = document.querySelectorAll(transition.selector);
             for (let elem of elems) {
@@ -122,6 +138,7 @@ function updateKeyframe() {
 
 function goToKeyframe(keyframe) {
     document.body.classList.add('no-transition');
+    throughTransitions = true;
     if (keyframe >= 0 && keyframe < allFrames.length) {
         while (currentKeyframe < keyframe) {
             advanceKeyframe();
@@ -133,30 +150,36 @@ function goToKeyframe(keyframe) {
     else {
         goToKeyframe(0);
     }
+    throughTransitions = false;
     document.body.classList.remove('no-transition');
 }
 
-function hideElements() {
-    document.body.classList.add('no-transition');
-    for (frame of allFrames) {
-        for (framePart of frame) {
-            for (transition of framePart) {
-                if (transition.effect == 'class' && transition.value == 'show') {
-                    let elems = document.querySelectorAll(transition.selector);
-                    for (let elem of elems) {
-                        if (transition.add && !elem.classList.contains('show')) {
-                            elem.classList.add('hide');
-                        }
-                        else if (!transition.add && !elem.classList.contains('hide')) {
-                            elem.classList.add('hide');
-                            elem.classList.add('show');
-                        }
-                    }
-                }
-            }
+function fullscreen() {
+    if (isFullscreen) {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) { /* Safari */
+            document.webkitExitFullscreen();
         }
+        document.getElementById('fullscreen-top').setAttribute('transform', '');
+        document.getElementById('fullscreen-bottom').setAttribute('transform', '');
+        document.getElementById('fullscreen-left').setAttribute('transform', '');
+        document.getElementById('fullscreen-right').setAttribute('transform', '');
+        document.getElementById('controls').style.opacity = 1;
     }
-    document.body.classList.remove('no-transition');
+    else {
+        if (document.body.requestFullscreen) {
+            document.body.requestFullscreen();
+        } else if (document.body.webkitRequestFullscreen) { /* Safari */
+            document.body.webkitRequestFullscreen();
+        }
+        document.getElementById('fullscreen-top').setAttribute('transform', 'translate(0, 10)');
+        document.getElementById('fullscreen-bottom').setAttribute('transform', 'translate(0, -10)');
+        document.getElementById('fullscreen-left').setAttribute('transform', 'translate(10, 0)');
+        document.getElementById('fullscreen-right').setAttribute('transform', 'translate(-10, 0)');
+        // document.getElementById('controls').style.opacity = 0;
+    }
+    isFullscreen = !isFullscreen;
 }
 
 window.addEventListener('keydown', function(e) {
@@ -178,8 +201,6 @@ window.addEventListener('keydown', function(e) {
 // })
 
 window.addEventListener('load', function() {
-    // hideElements();
-    feather.replace();
     document.getElementById('cover').classList.add('hide');
 
     if (URLparams.has('frame')) {
